@@ -35,4 +35,4 @@ Note that the median filter cannot be determined close to the beginning and endi
 \subsection{Determining the jump point and parachute opening point}
 The data in Figure \ref{fig:filtered_data} used to find the jumping point and parachute opening point. As soon as the skydiver jumps out of the plane he will catch a lot of wind and his acceleration will have a huge upward change. As soon as he opens his parachute he will have a huge change in acceleration as well, but in this case his acceleration is low. This means we can detect the jump point and parachute opening points as they will be the extreme values after applying the median filter.
 
-The window of
+The window used for determining this points is 10. It appeared that this value worked for all given data sets. More testing is needed to determine this value. Also, a threshold for the extreme values must be used. Otherwise the system could indicate a relative small change in the acceleration as the jump or parachute opening. Extra data must be collected to determine these values as well.
