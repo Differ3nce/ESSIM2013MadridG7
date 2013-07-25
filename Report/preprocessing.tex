@@ -23,13 +23,16 @@ A median filter works almost the same as a moving average filter, but instead of
   (MF(D))_i := \text{Median}(D_{i-w},\dots,D_{i+w})
 \end{equation}
 
-Note that the median filter cannot be determined close to the beginning and ending of $D$. A median filter is good for removing peeks that are caused by digital noise. For the accelerometers this is the case and after applying a median filter it becomes much more steady. In Figure \ref{fig:filtered_data} an example of this can be seen. The
+Note that the median filter cannot be determined close to the beginning and ending of $D$. A median filter is good for removing peeks that are caused by digital noise. For the accelerometers this is the case and after applying a median filter it becomes much more steady. In Figure \ref{fig:filtered_data} an example of this can be seen.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{Pictures/filtered_data.eps}
-  \caption{The median filter can be used to determine the jump point and parachute opening point.}
+  \caption{The median filter can be used to determine the jump point and parachute opening point. The acceleration is the norm of the three axis.}
   \label{fig:filtered_data}
 \end{figure}
 
 \subsection{Determining the jump point and parachute opening point}
+The data in Figure \ref{fig:filtered_data} used to find the jumping point and parachute opening point. As soon as the skydiver jumps out of the plane he will catch a lot of wind and his acceleration will have a huge upward change. As soon as he opens his parachute he will have a huge change in acceleration as well, but in this case his acceleration is low. This means we can detect the jump point and parachute opening points as they will be the extreme values after applying the median filter.
+
+The window of
