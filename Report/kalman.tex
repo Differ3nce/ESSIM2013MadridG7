@@ -1,25 +1,32 @@
 We begin with writing our ODE as a system of first order ODE:s.
-\begin{equation*}
-	\frac{d^2h}{dt^2} = \frac{D}{m} - g \Longleftrightarrow f(h,v)=
+\begin{equation}
+	\frac{d^2h}{dt^2} = \frac{D}{m} - g \Longleftrightarrow 
 	\left\lbrace
 	\begin{array}{ll}
 		\dot{h}= v & , h(t_0)=h_0 \\
-		\dot{v}= \frac{1}{2m}\varrho v(t)^2c_DA-g& , v(t_0)=v_0
+		\dot{v}= \frac{1}{2m}\varrho v^2c_DA-g& , v(t_0)=v_0
 	\end{array}
 	\right.
-\end{equation*}
+\end{equation}
 The extended Kalman filter can be formulated as
-\begin{equation*}
+\begin{equation*}\label{eq:model}
 	\begin{array}{l}
-%		\Bx_k = \xVec= f(\Bx_{k-1})+\Bw_{k-1}=\BF\Bx_{k-1}+\Bw_{k-1}\\
-%		\Bz_k = \zVec=  c(\Bx_k)+\Bv_k = \BC\Bx_k+\Bv_k
 		\Bx_k = \xVec= f(\Bx_{k-1})+\Bw_{k-1}\\
 		\Bz_k = \zVec=  c(\Bx_k)+\Bv_k
-	\end{array}
+	\end{array}	
 \end{equation*}
-where $c(h,v) = \cField$. \\
-Further on both $\Bv$ and $\Bw$ are the state transition and observation noises which are both assumed to be zero mean multivariate Gaussian noises with covariance $\textbf{Q}_k$ and $\textbf{R}_k$ respectively. In our case all of these are assumed to be zero.
-The process of applying the extended Kalman filter can divided into two parts predict and update.\\
+where $f(\Bx_k)$ is the state function(?) and $c(h,v) = \cField$ is the observation function(?). \\
+Further on both $\Bv$ and $\Bw$ are the state transition and observation noises which are both assumed to be zero mean multivariate Gaussian noises with covariance $\textbf{Q}_k$ and $\textbf{R}_k$ respectively. 
+
+In our case $\BQ_k$ and $\BR_k$ are constant. To find a accurate $\BQ_k$ we have to study a large database of samples but since we do not have it we have to rely on 
+intuition. Therefore we choose $\BQ_k = \QMatrix$ where $5$ and $0.2$ is a guess of the standard deviation of the height respective the velocity. 
+
+On the other hand $\BR_k$ was partly determined by intuition because only the standard deviation of the height $\sigma = 15$m was given by the company.  So we have $\BR_k = \RMatrix$.
+
+First we have to discretize the model \eqref{eq:model} to find the state function(?) $f(\Bx_k)$ and observation function(?) $c(\Bx_k)$. We do this by applying a four step Runge-Kutta method. 
+
+Now we are ready to apply the extended Kalman filter. The process of applying the extended Kalman filter can divided into two parts predict and update.\\
+
 \subsubsection*{Predict}
 \begin{tabbing}
 \hspace{6cm}\=\kill
