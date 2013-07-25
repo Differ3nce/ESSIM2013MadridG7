@@ -1,0 +1,128 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\frenchspacing
+\usepackage{parskip}
+\author{Group 7}
+
+%SOME BOLD LETTERS
+\newcommand{\Bx}{\textbf{x}}
+\newcommand{\Bu}{\textbf{u}}
+\newcommand{\BP}{\textbf{P}}
+\newcommand{\BF}{\textbf{F}}
+\newcommand{\BC}{\textbf{C}}
+\newcommand{\BK}{\textbf{K}}
+\newcommand{\BS}{\textbf{S}}
+\newcommand{\By}{\textbf{y}}
+\newcommand{\Bz}{\textbf{z}}
+\newcommand{\Bw}{\textbf{w}}
+\newcommand{\Bv}{\textbf{v}}
+%SOME MATH
+
+\newcommand{\zVec}
+{
+	\left[
+	\begin{matrix}
+		h_{k} \\
+		\dot{\| v_{k} \|}
+	\end{matrix}\right]
+}
+
+\newcommand{\xVec}
+{
+	\left[
+	\begin{matrix}
+		h_{k} \\
+		\| v_{k} \|
+		\end{matrix}\right]
+}
+
+\newcommand{\unknownH}
+{
+	\left[
+	\begin{array}{cc}
+		c_{11} & c_{12} \\
+		c_{21} & c_{22}
+	\end{array}
+	\right]
+}
+
+\begin{document}
+\title{Skydiver}
+\maketitle
+
+\begin{center}
+\textbf{Miriam Ruiz Ferrández}\\
+\textit{Faculty of Mathematics, University of Santiago de Compostela,\\
+Galicia, Spain}
+
+\textbf{Philipp M\"{u}ller}\\
+\textit{Faculty of Engineering Sciences, Tampere University of Technology,\\
+P.O. Box 692, FI-33101 Tampere, Finland}
+
+\textbf{Katharina Rafetseder}\\
+\textit{Faculty of Mathematics, Johannes Kepler Universit\"{a}t Linz,\\
+Altenberger Str. 69, 4040 Linz, Austria}
+
+\textbf{Tom Slenders}\\
+\textit{Faculty of Mathematics and Computer Science, Eindhoven University of Technology,\\
+Den Dolech 2, Postbus 513, 5600 MB Eindhoven, The Netherlands}
+
+\textbf{Angelos Toytziaridis}\\
+\textit{Faculty of Engineering, University of Lund,\\
+Box 117, SE-221 00  Lund, Sweden}\\
+\vspace{1cm}
+\textbf{Instructor: K. Kulshreshtha }\\
+\textit{ ,University of Paderborn,\\
+, , Germany}
+
+\end{center}
+
+\thispagestyle{empty}
+\newpage
+\begin{abstract}
+Modelling the trajectory of a skydiver.
+\end{abstract}
+\newpage
+\section{Introduction}
+\input{introduction}
+
+\section{Problem formulation}
+\input{problem}
+
+\section{Approach}
+\input{approach}
+
+\section{Theory}
+\subsection{Given equations}
+\input{equations}
+
+\subsection{Assumptions}
+\input{assumptions}
+
+\subsection{ODE}
+\input{ODE}
+
+\subsection{Approximation of parameters}
+\input{approximationparameters}
+
+\subsection{Extended Kalman filter}
+\input{kalman}
+
+%\section{ARIMA model}
+%\input{arima}
+
+\section{Result}
+\input{result}
+
+\section{Conclusion}
+\input{conclusion}
+
+\bibliography{sources}{}
+\bibliographystyle{plain}
+
+\end{document}
