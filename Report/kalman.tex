@@ -17,7 +17,8 @@ The extended Kalman filter can be formulated as
 		\Bz_k = \zVec=  c(\Bx_k)+\Bv_k
 	\end{array}
 \end{equation*}
-where $\Bv$ and $\Bw$ are the state transition and observation noises which are both assumed to be zero mean multivariate Gaussian noises with covariance $\textbf{Q}_k$ and $\textbf{R}_k$ respectively. In our case all of these are assumed to be zero.
+where $c(h,v) = \cField$. \\
+Further on both $\Bv$ and $\Bw$ are the state transition and observation noises which are both assumed to be zero mean multivariate Gaussian noises with covariance $\textbf{Q}_k$ and $\textbf{R}_k$ respectively. In our case all of these are assumed to be zero.
 The process of applying the extended Kalman filter can divided into two parts predict and update.\\
 \subsubsection*{Predict}
 \begin{tabbing}
@@ -31,7 +32,7 @@ Predicted covariance estimate\>$\BP_{k|k-1} = \BF_{k-1}\BP_{k-1|k-1}\BF_{k-1}^T+
 Innovation or measurement residual\> $\tilde{\By}= \Bz_k-c(\hat{\Bx}_{k|k-1})$\\
 Innovation (or residual) covariance\> $\BS_k=\BC_k\BP_{k|k-1}\BC^T_k+\textbf{R}_k$\\
 Near-optimal Kalman gain\> $\BK=\BP_{k|k-1}\BC^T_k\BS^{-1}_k$\\
-Updated state estimate\> $\hat{\Bx}_k|k=\hat{\Bx}_{k|k-1}+\BK_k\tilde{\By}_k$\\
+Updated state estimate\> $\hat{\Bx}_{k|k}=\hat{\Bx}_{k|k-1}+\BK_k\tilde{\By}_k$\\
 Updated estimate covariance\> $\BP_{k|k}=(\textbf{I}-\BK_k\BC_k)\BP_{k|k-1}$
 \end{tabbing}
 where the state transition matrix are defined to be the following Jacobians
@@ -41,4 +42,3 @@ where the state transition matrix are defined to be the following Jacobians
 \begin{equation*}
 	\BC_{k}=\left. \frac{\partial c}{\partial \Bx}\right|_{{\hat{\Bx}_{k|k-1},			\Bu_{k-1}}}
 \end{equation*}
-and $c = $
