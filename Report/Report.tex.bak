@@ -5,7 +5,9 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\author{Skydiver group}
+\frenchspacing
+\usepackage{parskip}
+\author{Group 7}
 
 %SOME BOLD LETTERS
 \newcommand{\Bx}{\textbf{x}}
@@ -25,8 +27,8 @@
 {
 	\left[
 	\begin{matrix}
-		h_{k} \\ 
-		\dot{v}_{k}
+		h_{k} \\
+		\dot{\| v_{k} \|}
 	\end{matrix}\right]
 }
 
@@ -34,18 +36,18 @@
 {
 	\left[
 	\begin{matrix}
-		h_{k} \\ 
-		v_{k}
-	\end{matrix}\right]
+		h_{k} \\
+		\| v_{k} \|
+		\end{matrix}\right]
 }
 
 \newcommand{\unknownH}
 {
 	\left[
 	\begin{array}{cc}
-		c_{11} & c_{12} \\ 
+		c_{11} & c_{12} \\
 		c_{21} & c_{22}
-	\end{array} 
+	\end{array}
 	\right]
 }
 
@@ -54,177 +56,73 @@
 \maketitle
 
 \begin{center}
-\textbf{Angelos Toytziaridis}\\
-\textit{Faculty of Engineering, University of Lund,\\ 
-Box 117, SE-221 00  Lund, Sweden}
-
 \textbf{Miriam Ruiz Ferrández}\\
-\textit{Faculty of Mathematics, University of Santiago de Compostela,\\ 
+\textit{Faculty of Mathematics, University of Santiago de Compostela,\\
 Galicia, Spain}
 
 \textbf{Philipp M\"{u}ller}\\
-\textit{Faculty of Engineering Sciences, Tampere University of Technology,\\ 
+\textit{Faculty of Engineering Sciences, Tampere University of Technology,\\
 P.O. Box 692, FI-33101 Tampere, Finland}
 
-\textbf{Katharina Rafetseder}\\
-\textit{Faculty of Mathematics, Johannes Kepler Universit\"{a}t Linz,\\ 
+\textbf{Katharina Rafetseder!!}\\
+\textit{Faculty of Mathematics, Johannes Kepler Universit\"{a}t Linz,\\
 Altenberger Str. 69, 4040 Linz, Austria}
 
-\textbf{Instructor: K. Kulshreshtha }\\ 
+\textbf{Tom Slenders}\\
+\textit{Faculty of Mathematics and Computer Science, Eindhoven University of Technology,\\
+Den Dolech 2, Postbus 513, 5600 MB Eindhoven, The Netherlands}
+
+\textbf{Angelos Toytziaridis}\\
+\textit{Faculty of Engineering, University of Lund,\\
+Box 117, SE-221 00  Lund, Sweden}\\
+\vspace{1cm}
+\textbf{Instructor: K. Kulshreshtha }\\
 \textit{ ,University of Paderborn,\\
 , , Germany}
- 
+
 \end{center}
 
-
+\thispagestyle{empty}
 \newpage
 \begin{abstract}
 Modelling the trajectory of a skydiver.
 \end{abstract}
 \newpage
-\section*{Introduction}
-%When skydiving there can be situations when 
-In the trajectory of a skydiver there is a critical point where he should switch on his parachute. After this point consequences can be disastrous if he hasn't switched it on yet. Our aim is to predict the skydiver's height in order to the parachute switches on automatically when he is too near of the floor.\\
-%improve his security.\\
-We design a model based on free fall law and wind drag force. Furthermore, we have some data about six different skydivers. The idea is to use our ODE model and the available data to predict the skydiver's height.
-\section*{Problem formulation}
-During the skydiving a small device samples data every $0.25$ s which is used to determine the skydiver's height and velocity. The sampled data includes a lot of noise due to the skydiver rotating and changing position all the time. Therefore the height and velocity can not be estimated accurately. So our goal is to reduce sampled noise.
+\section{Introduction}
+\input{introduction}
 
-\section*{Approach}
-\subsection*{Method 1}
-\begin{enumerate}
-	\item Create an ODE.
-	\item Estimate unknown parameters.
-	\item Create a extended Kalman filter.
-\end{enumerate}
-Our idea is to 
-\subsection*{Method 2}
-\begin{enumerate}
-	\item Create an ODE.
-	\item Estimate unknown parameters.
-	\item Create a ARMA model.
-\end{enumerate}
-\section*{Theory}
-\subsection*{Given equations}
-We let $h$ be the height and $v$ the velocity in the z-direction.
-Barometric formula, from which we get the velocity. 
-\begin{equation}
-\frac{P}{P_0} = \left(\frac{T_0}{T_0+L_0h}\right)^{\frac{gM}{R^*L_0}}
-\label{eq:BarometricFormula}
-\end{equation}
-Wind drag
-\begin{equation}
-D=\frac{1}{2}\varrho v^2c_DA
-\label{eq:WindDrag}
-\end{equation}
-Air density
-\begin{equation}
-\rho = \rho _0 \left( \frac{T_0+L_0 h}{T_0}\right) ^{\left(-\frac{gM}{R^*L_0}\right)-1}
-\label{eq:AirDensity}
-\end{equation}
-Where the standard Temperature lapse rate $L_0=-0.0065\,\frac{K}{m}$, standard Temperature $T_0=293\,K$, density $\rho_0=1.2041$, Molar mass of air $M=0.0289644\,\frac{kg}{mol}$ and the Universal gas constant $R^*=8.31432$.
+\section{Problem formulation}
+\input{problem}
 
-\subsection*{Assumptions}
-The gravitational acceleration can be kept constant because there is only a notable change every 100 km.
+\section{Approach}
+\input{approach}
 
-\subsection*{ODE}
-We find that the z-acceleration is $\frac{d^2z}{dt^2} = \frac{D}{m} - g$, where $D$ is the wind drag \eqref{eq:WindDrag}, $g=9.81$ m$/$s$^2$ is the gravitational acceleration and $m$ is the mass of the diver.
-After inserting we receive the following equation
-\begin{align}
-\frac{d^2z}{dt^2}=\frac{1}{2m}\rho(z)\left(\frac{dz}{dt}\right)^2\underbrace{c_{D}A}_{=:c^*(t)}-g,
-\end{align}
-with $\rho(z) = \rho _0 \left( \frac{T_0+L_0 z}{T_0}\right) ^{(-\frac{gM}{R^*L_0})-1}$.
-In the following we will assume that the parameter $c^*$ is constant over the time.
+\section{Theory}
+\subsection{Given equations}
+\input{equations}
 
+\subsection{Assumptions}
+\input{assumptions}
 
-\subsection*{Approximation of parameters} 
-The next step is to approximate the unknown parameter $c^*:=c_{D}A$, which depends for example on the way the diver dives. Hence, the best way is to determine this parameter by means of non-linear data fitting for ODEs. The first step is to rewrite the equation to the following system of equations
-\begin{align*}
-\frac{dz}{dt}&=v(t)\\
-\frac{dv}{dt}&=\frac{1}{2m}\rho(z)v(t)^2c^*-g.
-\end{align*} 
-Given the data points ${(t_i,y_i)}_{i=1}^m$ we compute the estimate of the parameter $c^*$ such that
-\begin{align}
-\underset{c\in\mathbb{R}}{\min}\quad &\phi=\frac{1}{2}\sum_{i=1}^m\Vert\hat{y}(t_i)-y_i\Vert_2^2\\
-s.t.\quad &\frac{d\Bx}{dt}(t)=f(t,\Bx(t),c)\quad \Bx(t_0)=\Bx_0\\
-	&\hat{y}(t)=g(\Bx(t),c)\\
-	&c_l\leq c\leq c_u,
-\end{align}
-where in our case
-\begin{align*}
-\Bx(t)=\left[
-\begin{array}{c}
-z(t)\\
-v(t)\\
-\end{array}
-\right],
-\end{align*}
+\subsection{ODE}
+\input{ODE}
 
-\begin{align*}
-f(t,x(t),c)=\left[
-\begin{array}{c}
-v(t)\\
-\frac{1}{2m}\rho(z)v(t)^2c(t)-g\\
-\end{array}
-\right],
-\end{align*}
+\subsection{Approximation of parameters}
+\input{approximationparameters}
 
-\begin{align*}
-g(\Bx(t),c)=z(t).
-\end{align*}
+\subsection{Extended Kalman filter}
+\input{kalman}
 
-One should note that we need some initial values for the height $z(t_0)$ and the velocity $v(t_0)$.
+%\section{ARIMA model}
+%\input{arima}
 
+\section{Result}
+\input{result}
 
-\subsection*{Extended Kalman filter}
-We begin with writing our ODE as a system of first order ODE:s. 
-\begin{equation*}
-	\frac{d^2h}{dt^2} = \frac{D}{m} - g \Longleftrightarrow f(h,v)=
-	\left\lbrace 
-	\begin{array}{ll}
-		\dot{h}= v & , h(t_0)=h_0 \\ 
-		\dot{v}= \frac{1}{2m}\varrho v(t)^2c_DA-g& , v(t_0)=v_0
-	\end{array} 
-	\right. 
-\end{equation*} 
-The extended Kalman filter can be formulated as
-\begin{equation*}
-	\begin{array}{l}
-		\Bx_k = \xVec= f(\Bx_{k-1})+\Bw_{k-1}=\BF\Bx_{k-1}+\Bw_{k-1}\\
-		\Bz_k = \zVec=  c(\Bx_k)+\Bv_k = \BC\Bx_k+\Bv_k
-	\end{array} 
-\end{equation*}
-where $\Bv$ and $\Bw$ are the state transition and observation noises which are both assumed to be zero mean multivariate Gaussian noises with covariance $\textbf{Q}_k$ and $\textbf{R}_k$ respectively. In our case all of these are assumed to be zero.
-The process of applying the extended Kalman filter can divided into two parts predict and update.\\
-\subsubsection*{Predict}
-\begin{tabbing}
-\hspace{6cm}\=\kill
-Predicted state estimate \> $\hat{\Bx}_{k|k-1}=f(\hat{\Bx}_{k-1|k-1})$ \\ 
-Predicted covariance estimate\>$\BP_{k|k-1} = \BF_{k-1}\BP_{k-1|k-1}\BF_{k-1}^T+\textbf{Q}_{k-1}$
-\end{tabbing} 
-\subsubsection*{Update}
-\begin{tabbing}
-\hspace{8cm}\=\kill
-Innovation or measurement residual\> $\tilde{\By}= \Bz_k-c(\hat{\Bx}_{k|k-1})$\\ 
-Innovation (or residual) covariance\> $\BS_k=\BC_k\BP_{k|k-1}\BC^T_k+\textbf{R}_k$\\ 
-Near-optimal Kalman gain\> $\BK=\BP_{k|k-1}\BC^T_k\BS^{-1}_k$\\ 
-Updated state estimate\> $\hat{\Bx}_k^k=\hat{\Bx}_{k|k-1}+\BK_k\tilde{\By}_k$\\ 
-Updated estimate covariance\> $\BP_{k|k}=(\textbf{I}-\BK_k\BC_k)\BP_{k|k-1}$
-\end{tabbing} 
-where the state transition matrix are defined to be the following Jacobians
-\begin{equation*}
-	\BF_{k-1}=\left. \frac{\partial f}{\partial \Bx}\right|_{{\hat{\Bx}_{k-1|k-1},			\Bu_{k-1}}}
-\end{equation*}
-\begin{equation*}
-	\BC_{k}=\left. \frac{\partial c}{\partial \Bx}\right|_{{\hat{\Bx}_{k|k-1},			\Bu_{k-1}}}
-\end{equation*}
-and $c = $
+\section{Conclusion}
+\input{conclusion}
 
-\section*{ARMA model}
-
-
-
-\section*{Result}
-\section*{Conclusion}
+\bibliography{sources}{}
+\bibliographystyle{plain}
 
 \end{document}
