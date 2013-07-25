@@ -1,1 +1,0 @@
-function medfilt(X,w)
