@@ -7,6 +7,15 @@
 \usepackage{graphicx}
 \frenchspacing
 \usepackage{parskip}
+\usepackage[dvipdfm]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+%\hypersetup{pageanchor=false}
 \author{Group 7}
 
 %SOME BOLD LETTERS
@@ -94,6 +103,7 @@ Box 117, SE-221 00  Lund, Sweden}\\
 
 \thispagestyle{empty}
 \newpage
+%\hypersetup{pageanchor=true}
 \begin{abstract}
 Modelling the trajectory of a skydiver.
 \end{abstract}
@@ -113,6 +123,9 @@ Modelling the trajectory of a skydiver.
 
 \subsection{Assumptions}
 \input{assumptions}
+
+\subsection{Preprocessing}
+\input{preprocessing}
 
 \subsection{ODE}
 \input{ODE}

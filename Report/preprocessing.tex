@@ -1,0 +1,35 @@
+The data provided appeared to have a lot of errors, therefore it was needed to preprocess the data to make it better interpretable. We have tried several approaches but it appeared that some very simple ones worked best.
+
+\subsubsection{Moving average filter}
+A moving average filter takes the average of an area, often called a window, around a certain value. For any ordered data set $D$ the moving average filter $\text{MAF}(D)$ with window $w$ can be calculated as follows:
+
+\begin{equation}
+  (MAF(D))_i := \frac1{2w+1}\sum_{j=i-w}^{i+w}D(j)
+\end{equation}
+
+Note that the moving average filter cannot be determined close to the beginning and ending of $D$. We use the moving average to determine the determine the velocity of the jumping point, which we will explain later. This can be seen in Figure \ref{fig:filtered_height}. The data is a lot smoother after applying the filter. We will later determine the velocity at the point of the dot and it will be much more precise by using the filtered data instead of the original data.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Pictures/filtered_height.eps}
+  \caption{The height at the moment of the jump. The window is set to 10. The dot shows where the velocity will be determined.}
+  \label{fig:filtered_height}
+\end{figure}
+
+\subsubsection{Median filter}
+A median filter works almost the same as a moving average filter, but instead of taking the mean, it takes the median of a window. For any ordered data set $D$ the median filter $\text{MF}(D)$ with window $w$ can be calculated as follows:
+
+\begin{equation}
+  (MF(D))_i := \text{Median}(D_{i-w},\dots,D_{i+w})
+\end{equation}
+
+Note that the median filter cannot be determined close to the beginning and ending of $D$. A median filter is good for removing peeks that are caused by digital noise. For the accelerometers this is the case and after applying a median filter it becomes much more steady. In Figure \ref{fig:filtered_data} an example of this can be seen. The
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Pictures/filtered_data.eps}
+  \caption{The median filter can be used to determine the jump point and parachute opening point.}
+  \label{fig:filtered_data}
+\end{figure}
+
+\subsection{Determining the jump point and parachute opening point}
