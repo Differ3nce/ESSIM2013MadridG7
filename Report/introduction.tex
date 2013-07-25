@@ -1,17 +1,11 @@
 %When skydiving there can be situations when
 
-In recent years, the extreme sport of skydiving has become increasingly popular. This, combined with the development 
-and availability of cheap accelerometers has generated a market for Automatic Activation Devices (AAD). AAD's 
+In recent years, the extreme sport of skydiving has become increasingly popular. This, combined with the development
+and availability of cheap accelerometers has generated a market for Automatic Activation Devices (AADs). AADs
 automatically release a reserve parachute when they detect the diver's velocity is greater than a predetermined
 value at a preset altitude. One such device is the CYPRES (Cybernetic Parachute Release System) produced by Airtec.
-The CYPRES is availble in four different models -  Expert, Student, Tandem and Speed. The devices differ only in the 
-activation parameters.
-
-In the trajectory of a skydiver there is a critical point where he should switch on his parachute. 
-After this point consequences can be disastrous if he hasn't switched it on yet. 
-Our aim is to predict the skydiver's height in order to the parachute switches on automatically when he is too near of 
-the floor.\\
-%improve his security.\\
-We design a model based on free fall law and wind drag force. 
-Furthermore, we have some data about six different skydivers. 
-The idea is to use our ODE model and the available data to predict the skydiver's height. 
+Ideally, the creators of CYPRES would like these emergency instruments to determine the exact height of the diver above the ground by using the already recorded data, and then, in case of emergencies, automatically deploy the parachute. However, due to the changing position and posture of the diver, the measured data
+ is very noisy. 
+ 
+ The objective of this project was to develop a physical model of the skydiver and use it to calibrate the measured data, reducing the amount of noise present in the signal. An ODE model has been developed based on the free fall and drag of the diver. The initial conditions for the model have been taken from the measured data after some filtering. An extended, non-linear, Kalman filter was then applied to give a reasonable prediction of the diver's height based on previously recorded data.
+ 
