@@ -1,0 +1,17 @@
+skydive1=importdata('j1.txt');
+data=skydive1(:,2)/128;
+%Linregvelocityscan(data,35,0.4,5)
+%linregamount(data,35,20)
+[jump,para]=Jump_points(25,1);
+d=data(jump:para);
+s=spline1(data(jump:para),10,0.1,-0.1,3,2);
+length(d)
+length(s)
+l=linreg3(data(jump:para),10,0.1,-0.1,3,2);
+length(l)
+figure(7)
+plot(jump:para,abs(s-d),'b',jump:para,abs(d(1:(length(d)-5))-l),'r')
+%plot(jump:para,spline(jump+points,data(jump+points),jump:para),jump:para,data(jump:para))
+%removeclosepoints([1,4,5,8,10,100,101,102,104,105,106],1)
+%4471
+%4723
