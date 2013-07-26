@@ -1,1 +1,12 @@
-During the skydiving a small device samples data every $0.25$ s which is used to determine the skydiver's height and velocity. The sampled data includes a lot of noise due to the skydiver rotating and changing position all the time. Therefore the height and velocity can not be estimated accurately. So our goal is to reduce sampled noise. 
+During the skydiving a small device measures the following data: pressure and acceleration (using triaxial accelerometers). This measurements are done every $0.25$\,s. The goal is now to use the last few of the measurements to determine the skydiver's height and velocity during his jump. The difficulty is that the height as well as the acceleration includes a lot of noise due to the skydiver rotating and changing position all the time. In case of the pressure the measurement errors are a result from the acting wind. In a situation as in figure \ref{fig:pressure_c} and figure \ref{fig:pressure_d} there will be no influence whereas in figure \ref{fig:pressure_a} and figure \ref{fig:pressure_b} we will measure more and less pressure, respectively. Since the height is calculated from the pressure we always have to take noise into account for our calculations. In spite of this the height measurements can be expected to be more accurate than the acceleration measured by the accelerometer. Moreover, the computation should be low on resources because it should run on a small device.
+\input{Pictures/Fig_pressure_total}
+The idea is to deploy the parachute in case the height is smaller than some critical height and the velocity is still higher than the critical velocity, which means the parachute has not been deployed by the skydiver on his own. A list of the critical heights and velocities is listed below:\\
+\hfill\\
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+     Type of diver & critical height  & critical velocity\\ \hline
+	Experts &  225\,$m$ & 35\,$\frac{m}{s}$  \\ \hline
+	Students & 300\,$m$  & 13\,$\frac{m}{s}$ \\ \hline
+	Tandem&  580\,$m$  & 35\,$\frac{m}{s}$  \\ \hline
+	Speed&  100-225\,$m$  & 43\,$\frac{m}{s}$  \\ \hline
+\end{tabular} 
