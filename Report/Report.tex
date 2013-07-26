@@ -7,6 +7,15 @@
 \usepackage{graphicx}
 \frenchspacing
 \usepackage{parskip}
+\usepackage[dvipdfm]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+%\hypersetup{pageanchor=false}
 \author{Group 7}
 
 %SOME BOLD LETTERS
@@ -21,6 +30,9 @@
 \newcommand{\Bz}{\textbf{z}}
 \newcommand{\Bw}{\textbf{w}}
 \newcommand{\Bv}{\textbf{v}}
+\newcommand{\BQ}{\textbf{Q}}
+\newcommand{\BR}{\textbf{R}}
+
 %SOME MATH
 
 \newcommand{\zVec}
@@ -61,6 +73,27 @@
 	\right.
 }
 
+
+\newcommand{\QMatrix}
+{
+	\left[
+	\begin{matrix}
+	5^2 & 0 \\ 
+	0 & 0.2^2
+	\end{matrix} 
+	\right]
+}
+
+\newcommand{\RMatrix}
+{
+	\left[
+	\begin{matrix}
+	15^2 & 0 \\ 
+	0 & 0.5^2
+	\end{matrix} 
+	\right]
+}
+
 \begin{document}
 \title{Skydiver}
 \maketitle
@@ -94,6 +127,7 @@ Box 117, SE-221 00  Lund, Sweden}\\
 
 \thispagestyle{empty}
 \newpage
+%\hypersetup{pageanchor=true}
 \begin{abstract}
 Modelling the trajectory of a skydiver.
 \end{abstract}
@@ -113,6 +147,9 @@ Modelling the trajectory of a skydiver.
 
 \subsection{Assumptions}
 \input{assumptions}
+
+\subsection{Preprocessing}
+\input{preprocessing}
 
 \subsection{ODE}
 \input{ODE}
